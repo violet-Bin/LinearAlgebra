@@ -1,4 +1,5 @@
 from playLA.Matrix import Matrix
+from playLA.Vector import Vector
 
 if __name__ == "__main__":
 
@@ -19,6 +20,15 @@ if __name__ == "__main__":
     print("2 * matrix = {}".format(2 * matrix))
     print("matrix / 2 = {}".format(matrix / 2))
     print("zero3 = {}".format(Matrix.zero(3, 3)))
+
+    T = Matrix([[1.5, 0], [0, 2]])
+    p = Vector([5, 3])
+    print(T.dot(p))
+
+    P = Matrix([[0, 4, 5], [0, 0, 3]])
+    print(T.dot(P))
+
+    print(P.T())
 
 
 

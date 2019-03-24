@@ -12,6 +12,10 @@ class Matrix:
         """返回一个r行c列的零矩阵"""
         return cls([[0] * c for _ in range(r)])
 
+    def T(self):
+        """返回矩阵的转置"""
+        return Matrix([e for e in self.col_vector(i)] for i in range(self.col_num()))
+
     def __add__(self, another):
         """返回两个矩阵的加法结果"""
         assert self.shape() == another.shape(), \
@@ -26,12 +30,26 @@ class Matrix:
         return Matrix([[a - b for a, b in zip(self.row_vector(i), another.row_vector(i))]
                        for i in range(self.row_num())])
 
+    def dot(self, another):
+        """返回矩阵乘法的结果"""
+        if isinstance(another, Vector):
+            # 矩阵和向量的乘法
+            assert self.col_num() == len(another), \
+                "Error in Matrix-Vector Multiplication."
+            return Vector([self.row_vector(i).dot(another) for i in range(self.row_num())])
+        if isinstance(another, Matrix):
+            # 矩阵和矩阵的乘法
+            assert self.col_num() == another.row_num(), \
+                "Error in Matrix-Matrix Multiplication."
+            return Matrix([[self.row_vector(i).dot(another.col_vector(j)) for j in range(another.col_num())]
+                           for i in range(self.col_num())])
+
     def __mul__(self, k):
-        """返回矩阵的数量乘法"""
+        """返回矩阵的数量乘法: self * k"""
         return Matrix([[e * k for e in self.row_vector(i)] for i in range(self.row_num())])
 
     def __rmul__(self, k):
-        """返回矩阵的数量乘法"""
+        """返回矩阵的数量乘法: k * self"""
         return self * k
 
     def __truediv__(self, k):
