@@ -30,5 +30,10 @@ if __name__ == "__main__":
 
     print(P.T())
 
+    I = Matrix.identity(2)
+    print(I)
+    print(matrix.dot(I))
+    print(I.dot(matrix))
+
 
 

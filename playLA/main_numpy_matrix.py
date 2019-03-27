@@ -29,5 +29,17 @@ if __name__ == "__main__":
 
     print(A.dot(p))
 
+    # 单位矩阵
+    I = np.identity(2)
+    print(I)
+
+    # 逆矩阵
+    invA = np.linalg.inv(A)
+    print(invA)
+    print(invA.dot(A))
+
+    C = np.array([[1, 2, 3], [4, 5, 6]])
+    # np.linalg.inv(C)  # numpy.linalg.linalg.LinAlgError: Last 2 dimensions of the array must be square
+
 
 
