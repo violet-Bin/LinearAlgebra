@@ -5,7 +5,11 @@ class Matrix:
     """矩阵类"""
 
     def __init__(self, list2d):
-        self._values = [row[:] for row in list2d]
+
+        if isinstance(list2d[0], list):
+            self._values = [row[:] for row in list2d]
+        elif isinstance(list2d[0], Vector):
+            self._values = [row.underlying_list() for row in list2d]
 
     @classmethod
     def zero(cls, r, c):
@@ -22,7 +26,7 @@ class Matrix:
 
     def T(self):
         """返回矩阵的转置"""
-        return Matrix([e for e in self.col_vector(i)] for i in range(self.col_num()))
+        return Matrix([[e for e in self.col_vector(i)] for i in range(self.col_num())])
 
     def __add__(self, another):
         """返回两个矩阵的加法结果"""

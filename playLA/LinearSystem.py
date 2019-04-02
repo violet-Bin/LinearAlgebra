@@ -5,12 +5,15 @@ from .Vector import Vector
 
 class LinearSystem:
 
-    def __init__(self, A, b):
+    def __init__(self, A, b=None):
 
-        assert A.row_num() == len(b), "row number of Matrix must be equal to the length of Vector"
+        assert b is None or A.row_num() == len(b), \
+            "row number of Matrix must be equal to the length of Vector"
         self._m = A.row_num()
         self._n = A.col_num()
 
+        if b is None:
+            self.Ab = [A.row_vector(i) for i in range(self._m)]
         if isinstance(b, Vector):
             self.Ab = [Vector(A.row_vector(i).underlying_list() + [b[i]]) for i in range(self._m)]
         if isinstance(b, Matrix):
@@ -81,6 +84,13 @@ def inv(A):
     return Matrix(invA)
 
 
+def rank(A):
+
+    ls = LinearSystem(A)
+    ls.gauss_jordan_elimination()
+
+    zero = Vector.zero(A.col_num())
+    return sum([row != zero for row in ls.Ab])
 
 
 

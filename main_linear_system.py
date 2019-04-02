@@ -1,6 +1,6 @@
 from playLA.Matrix import Matrix
 from playLA.Vector import Vector
-from playLA.LinearSystem import LinearSystem, inv
+from playLA.LinearSystem import LinearSystem, inv, rank
 
 if __name__ == "__main__":
 
@@ -30,12 +30,15 @@ if __name__ == "__main__":
     ls8.fancy_print()
     print()
 
-    A = Matrix([[1, 2], [3, 4]])
-    invA = inv(A)
+    A9 = Matrix([[1, 2], [3, 4]])
+    invA = inv(A9)
     print(invA)
-    print(A.dot(invA))
-    print(invA.dot(A))
+    print(A9.dot(invA))
+    print(invA.dot(A9))
 
+    print(rank(A8))
+    print(rank(A7))
+    print(rank(A))
 
 
 

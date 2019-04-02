@@ -36,3 +36,10 @@ if __name__ == "__main__":
     # try:
     print(vec.dot(vec2))
     # except
+
+    vec4 = Vector([0, 0])
+    print("{} == {} ? {}".format(zero2, vec4, vec4 == zero2))
+    print("{} == {} ? {}".format(zero2, vec, vec == zero2))
+
+
+
